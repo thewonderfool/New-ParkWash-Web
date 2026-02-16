@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Port of Galveston Cruise Parking</title>
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Downloaded Assets -->
+    <link rel="stylesheet" href="dist/styles/main.min.1749056402.css">
+    <link rel="stylesheet" href="fonts/galveston.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Keep our custom overrides last -->
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="navbar">
+        <div class="container navbar-content">
+            <div class="logo">
+                <img src="svg/logo-white.svg" alt="Port of Galveston" style="height: 50px;">
+                <!-- <i class="fa-solid fa-anchor"></i> -->
+                <div class="logo-text" style="margin-left: 10px;">
+                    <h1>Port of Galveston</h1>
+                    <span>PREMIUM CRUISE PARKING</span>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a href="#home" class="active">Home</a>
+                <a href="#services">Services</a>
+                <a href="#tour">Virtual Tour</a>
+                <a href="#directions">Directions</a>
+                <a href="#contact">Contact</a>
+                <button class="btn-primary" onclick="openBookingModal()">Book Now</button>
+            </nav>
+            <div class="mobile-menu-toggle">
+                <img src="svg/menu-mask.svg" alt="Menu" style="width: 30px;">
+            </div>
+        </div>
+    </header>
+
+    <!-- ... existing content ... -->
+
+    <!-- Scripts -->
+    <script src="dist/scripts/main.min.1767622294.js"></script>
+    <script src="dist/scripts/Dismissible.8c3f7c34c13765bbedc0.min.js"></script>
+    <script src="dist/scripts/InteractiveMapLite.50caa0482566e95c271e.min.js"></script>
+    <!-- Add other scripts if their functionality is specifically needed, 
+         but main + map is likely sufficient for the visual clone -->
+
+    <script src="script.js"></script>
+</body>
+
+<!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="hero-overlay"></div>
+    <!-- Placeholder for Customer Asset: cruise_ship_flat_design.jpg -->
+    <!-- Logic to switch background if file exists is in CSS class .hero-bg-custom -->
+    <div class="hero-content container">
+        <h1 class="hero-title">Park & Wash <br> <span class="text-gold">Cruise Parking</span></h1>
+        <p class="hero-subtitle">The closest, safest, and most affordable parking for your cruise vacation. Reserve
+            your spot today.</p>
+        <div class="hero-actions">
+            <button class="btn-primary btn-large" onclick="openBookingModal()">Reserve Parking <i
+                    class="fa-solid fa-arrow-right"></i></button>
+            <a href="#services" class="btn-secondary">View Services</a>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Facts -->
+<section class="info-grid container">
+    <div class="info-card">
+        <i class="fa-solid fa-shield-halved icon-gold"></i>
+        <h3>Secure Facility</h3>
+        <p>Secure fenced lot with lighting & cameras.</p>
+    </div>
+    <div class="info-card">
+        <i class="fa-solid fa-tags icon-gold"></i>
+        <h3>Market Pricing</h3>
+        <p>Competitive market pricing — shown during booking.</p>
+    </div>
+    <div class="info-card">
+        <i class="fa-solid fa-clock icon-gold"></i>
+        <h3>Open Daily</h3>
+        <p>Hours vary by cruise schedule.</p>
+    </div>
+</section>
+
+<!-- Virtual Tour Section -->
+<section id="tour" class="tour-section">
+    <div class="container text-center">
+        <h2 class="section-title">Explore the Port <span class="text-gold">360° Tour</span></h2>
+        <p class="section-subtitle">Take a virtual tour of our parking facilities and the surrounding Galveston
+            island.</p>
+    </div>
+
+    <div class="tour-viewer-container">
+        <iframe src="https://view.skynav.app/visit-galveston-master-tour/welcome/galveston-aerial"
+            title="SkyNav 360 Tour" allowfullscreen="true" style="width:100%; height:100%; border:none;">
+        </iframe>
+    </div>
+</section>
+
+<!-- Our Services Section -->
+<section id="services" class="rates-section bg-light">
+    <div class="container text-center">
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-subtitle">Pricing varies due to the competitive market.<br>Please call for current pricing.
+        </p>
+
+        <div class="rates-grid">
+            <!-- Cruise Parking -->
+            <div class="rate-card popular">
+                <div class="badge">Most Popular</div>
+                <i class="fa-solid fa-car fa-3x text-gold" style="margin-bottom: 20px;"></i>
+                <h4>Cruise Parking</h4>
+                <p>Secure parking for your vehicle while you enjoy your cruise. Fenced, lighted facility with 24/7
+                    security.</p>
+                <ul style="text-align: left; margin: 20px 0; font-size: 0.9rem;">
+                    <li><i class="fa-solid fa-check text-gold"></i> Drop‑off near terminal</li>
+                    <li><i class="fa-solid fa-check text-gold"></i> Competitive rates available</li>
+                    <li><i class="fa-solid fa-check text-gold"></i> Digital reservation</li>
+                </ul>
+
+                <div class="payment-note"
+                    style="text-align: left; font-size: 0.85rem; background: rgba(10, 25, 47, 0.05);">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <div>
+                        <strong>Drop-off Info:</strong><br> We cannot legally enter port property. We’ll drop you as
+                        close as possible:
+                        <ul style="margin-top: 5px; list-style-type: disc; padding-left: 20px;">
+                            <li>Ships at 25th St & Harborside Dr: about 0.22 miles (less than 5‑minute walk).</li>
+                            <li>Ships opposite New Strand: directly across the street from Park & Wash.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button class="btn-primary btn-block" onclick="openBookingModal()">Book Parking</button>
+            </div>
+
+            <!-- Car Detailing -->
+            <div class="rate-card">
+                <i class="fa-solid fa-spray-can-sparkles fa-3x text-gold" style="margin-bottom: 20px;"></i>
+                <h4>Car Detailing</h4>
+                <p>Full-service wash and detailing while you cruise. Choose Regular, Deluxe, or VIP options during
+                    booking.</p>
+                <ul style="text-align: left; margin: 20px 0;">
+                    <li><i class="fa-solid fa-check text-gold"></i> Exterior wash & dry</li>
+                    <li><i class="fa-solid fa-check text-gold"></i> Interior vacuum & windows</li>
+                    <li><i class="fa-solid fa-check text-gold"></i> Premium wax (VIP)</li>
+                </ul>
+                <button class="btn-outline btn-block" onclick="openBookingModal()">Add to Booking</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer id="contact" class="footer">
+    <div class="container footer-content">
+        <div class="footer-col">
+            <div class="logo">
+                <i class="fa-solid fa-anchor text-gold"></i>
+                <h3>Port of Galveston</h3>
+            </div>
+            <p>Providing safe and secure parking for cruise passengers for over 20 years.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#tour">Virtual Tour</a></li>
+                <li><a href="#directions">Directions</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Contact Us</h4>
+            <ul>
+                <li><i class="fa-solid fa-phone"></i> (409) 765-9321</li>
+                <li><i class="fa-solid fa-envelope"></i> parking@portofgalveston.com</li>
+                <li><i class="fa-solid fa-location-dot"></i> 123 Rosenberg Ave, Galveston, TX</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom text-center">
+        <p>&copy; 2024 Port of Galveston Parking. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<!-- Booking Modal -->
+<div id="bookingModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeBookingModal()">&times;</span>
+        <div class="modal-header">
+            <h2>Reserve Your Spot</h2>
+            <p>Secure your parking in minutes.</p>
+        </div>
+        <form id="bookingForm" onsubmit="handleReservation(event)">
+            <div class="form-group">
+                <label for="cruise-ship">Select Your Cruise Ship</label>
+                <select id="cruise-ship" required>
+                    <option value="" disabled selected>Select Ship</option>
+                    <option value="carnival-breeze">Carnival Breeze</option>
+                    <option value="carnival-dream">Carnival Dream</option>
+                    <option value="royal-allure">Royal Caribbean Allure</option>
+                    <option value="disney-magic">Disney Magic</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="arrival-date">Arrival Date</label>
+                    <input type="date" id="arrival-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="departure-date">Departure Date</label>
+                    <input type="date" id="departure-date" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="vehicle-make">Vehicle Make</label>
+                    <input type="text" id="vehicle-make" placeholder="e.g. Ford" required>
+                </div>
+                <div class="form-group">
+                    <label for="vehicle-model">Model</label>
+                    <input type="text" id="vehicle-model" placeholder="e.g. Explorer" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="license-plate">License Plate</label>
+                <input type="text" id="license-plate" placeholder="TX-1234" required>
+            </div>
+
+            <div class="price-estimate">
+                <span>Estimated Total:</span>
+                <span id="total-price" class="price-value">$0.00</span>
+            </div>
+
+            <div class="payment-note">
+                <i class="fa-solid fa-circle-info"></i> No payment required today. Payment will be collected upon
+                arrival at the parking lot.
+            </div>
+
+            <button type="submit" class="btn-primary btn-block">Confirm Reservation</button>
+        </form>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div id="successModal" class="modal">
+    <div class="modal-content text-center">
+        <div class="success-icon">
+            <i class="fa-solid fa-check-circle"></i>
+        </div>
+        <h2>Reservation Confirmed!</h2>
+        <p>Your parking spot has been reserved.</p>
+        <div class="reservation-details">
+            <p><strong>Confirmation #:</strong> <span id="conf-number">8X29B1</span></p>
+            <p>Please present this confirmation to the attendant upon arrival.</p>
+        </div>
+        <button class="btn-primary" onclick="closeSuccessModal()">Close</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+
+</html>

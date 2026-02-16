@@ -1,0 +1,784 @@
+/* Core Variables */
+:root {
+    --primary-blue: #0a192f;
+    /* Deep Navy */
+    --secondary-blue: #112240;
+    /* Lighter Navy */
+    --accent-gold: #f2b90d;
+    /* Brand Gold */
+    --text-light: #ccd6f6;
+    --text-white: #ffffff;
+    --bg-light: #f8f9fa;
+    --card-bg: #8892b0;
+    --font-heading: 'AvenirProWeb', sans-serif;
+    --font-body: 'AvenirProWeb', sans-serif;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-light);
+    color: #333;
+    line-height: 1.6;
+}
+
+/* ... existing code ... */
+
+/* Tour Section */
+.tour-section {
+    padding: 80px 0;
+    background: white;
+}
+
+.tour-viewer-container {
+    margin-top: 40px;
+    position: relative;
+    /* Increased height for better view */
+    height: 600px;
+    background: #ddd;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.tour-viewport {
+    width: 100%;
+    height: 100%;
+    /* Mock 360 View Background - using a placeholder panorama */
+    background: url('https://images.unsplash.com/photo-1567117565406-896ad2e29354?q=80&w=3024&auto=format&fit=crop');
+    /* Changed from cover to 300% width to allow panning */
+    background-size: 300% 100%;
+    background-position: 50% 50%;
+    /* Center start */
+    transition: background-position 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Removed mock animation loop to allow manual control */
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-heading);
+    color: var(--primary-blue);
+    margin-bottom: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.text-gold {
+    color: var(--accent-gold);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.bg-light {
+    background-color: #f0f2f5;
+}
+
+/* Buttons */
+.btn-primary {
+    display: inline-block;
+    background-color: var(--accent-gold);
+    color: var(--primary-blue);
+    padding: 12px 28px;
+    border-radius: 5px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.btn-primary:hover {
+    background-color: #e0a800;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    display: inline-block;
+    border: 2px solid var(--text-white);
+    color: var(--text-white);
+    padding: 12px 28px;
+    border-radius: 5px;
+    font-weight: 600;
+    margin-left: 15px;
+    padding: 10px 26px;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-outline {
+    display: inline-block;
+    border: 2px solid var(--primary-blue);
+    color: var(--primary-blue);
+    background: transparent;
+    padding: 10px 24px;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-blue);
+    color: var(--text-white);
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+.btn-large {
+    padding: 15px 35px;
+    font-size: 1.1rem;
+}
+
+/* Navigation */
+.navbar {
+    background-color: var(--primary-blue);
+    color: var(--text-white);
+    padding: 15px 0;
+    position: fixed;
+    /* Fixed to overlay hero */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.8s ease, padding 0.8s ease, box-shadow 0.8s ease;
+}
+
+.navbar.transparent-nav {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 25px 0;
+    /* Slight spacing increase for open feel */
+}
+
+/* Restore background on hover for usability */
+.navbar.transparent-nav:hover {
+    background-color: rgba(10, 25, 47, 0.9);
+}
+
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo i {
+    font-size: 2rem;
+    color: var(--accent-gold);
+}
+
+.logo-text h1 {
+    color: var(--text-white);
+    font-size: 1.2rem;
+    margin: 0;
+    line-height: 1;
+}
+
+.logo-text span {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: var(--text-light);
+}
+
+.nav-links a {
+    color: var(--text-light);
+    margin-left: 25px;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--accent-gold);
+}
+
+.nav-links .btn-primary {
+    margin-left: 25px;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 85vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    background-color: var(--secondary-blue);
+    /* Simplified background: Gradient + User Image ONLY */
+    background: linear-gradient(rgba(10, 25, 47, 0.6), rgba(10, 25, 47, 0.4)), url('cruise_ship_flat_design.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    color: var(--text-white);
+    overflow: hidden;
+    /* Ensure masks don't spill out */
+}
+
+/* Wave Masks Removed to fix visual artifacts */
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.hero-title {
+    font-size: 4rem;
+    line-height: 1.1;
+    color: var(--text-white);
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-light);
+    margin-bottom: 30px;
+    max-width: 600px;
+}
+
+/* Info Grid */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: -50px;
+    position: relative;
+    z-index: 10;
+    margin-bottom: 80px;
+}
+
+.info-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+}
+
+.info-card i {
+    font-size: 2.5rem;
+    color: var(--accent-gold);
+    margin-bottom: 20px;
+}
+
+/* Tour Section */
+.tour-section {
+    padding: 80px 0;
+    background: white;
+}
+
+.tour-viewer-container {
+    margin-top: 40px;
+    position: relative;
+    width: 100%;
+    height: 600px;
+    background: #ddd;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.tour-viewport {
+    width: 100%;
+    height: 100%;
+    /* Mock 360 View Background - using reliable Unsplash image */
+    background: url('https://images.unsplash.com/photo-1567117565406-896ad2e29354?q=80&w=3024&auto=format&fit=crop');
+    /* Changed from cover to 300% width to allow panning */
+    background-size: 300% 100%;
+    background-position: 50% 50%;
+    transition: background-position 1s ease-out;
+}
+
+.tour-overlay-ui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Let clicks pass through to 'hotspots' */
+    z-index: 5;
+}
+
+/* ... existing code ... */
+
+.tour-map-overlay {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    bottom: 10px;
+    width: 280px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transform: translateX(-120%);
+    /* Hidden by default */
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 100;
+    /* Boosted Z-Index */
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
+}
+
+.tour-map-overlay.active {
+    transform: translateX(0);
+}
+
+.map-header {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.map-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.close-map {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.map-content {
+    flex: 1;
+    position: relative;
+    background: #eef2f5;
+    margin: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.mock-map {
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(#eef2f5 0 20px, #e0e0e0 20px 21px),
+        repeating-linear-gradient(90deg, #eef2f5 0 20px, #e0e0e0 20px 21px);
+    position: relative;
+}
+
+.map-point {
+    position: absolute;
+    background: var(--primary-blue);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    transition: var(--transition);
+}
+
+.map-point:hover {
+    background: var(--accent-gold);
+    color: var(--primary-blue);
+    z-index: 5;
+}
+
+.map-jump-btn {
+    position: absolute;
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.map-jump-btn:hover {
+    background: var(--accent-gold);
+    color: var(--primary-blue);
+}
+
+.tour-controls {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: auto;
+}
+
+.control-btn {
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--primary-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+}
+
+.control-btn:hover {
+    background: var(--accent-gold);
+}
+
+.hotspot {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: var(--accent-gold);
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-blue);
+    font-size: 0.9rem;
+    animation: pulse 2s infinite;
+    transform: translate(-50%, -50%);
+}
+
+.hotspot:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    font-size: 0.8rem;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(242, 185, 13, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(242, 185, 13, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(242, 185, 13, 0);
+    }
+}
+
+/* Rates Grid */
+.rates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.rate-card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.rate-card.popular {
+    border: 2px solid var(--accent-gold);
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+.rate-card h4 {
+    color: var(--secondary-blue);
+    font-size: 1.4rem;
+}
+
+.rate-card .price {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin: 15px 0;
+    font-family: var(--font-heading);
+}
+
+.rate-card .badge {
+    position: absolute;
+    top: 20px;
+    right: -30px;
+    background: var(--accent-gold);
+    color: var(--primary-blue);
+    padding: 5px 30px;
+    transform: rotate(45deg);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    padding-top: 80px;
+    padding-bottom: 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 50px;
+    margin-bottom: 50px;
+}
+
+.footer h3,
+.footer h4 {
+    color: var(--text-white);
+    margin-bottom: 1.5rem;
+}
+
+.footer ul li {
+    margin-bottom: 15px;
+}
+
+.footer-col i {
+    color: var(--accent-gold);
+    margin-right: 10px;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    font-size: 0.9rem;
+}
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 25, 47, 0.9);
+    overflow: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #999;
+}
+
+.close-modal:hover {
+    color: #333;
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.modal-header h2 {
+    margin-bottom: 5px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--secondary-blue);
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: var(--font-body);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 0 3px rgba(242, 185, 13, 0.2);
+}
+
+.price-estimate {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.price-value {
+    color: var(--primary-blue);
+    font-size: 1.4rem;
+}
+
+.payment-note {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 25px;
+    display: flex;
+    gap: 10px;
+    align-items: start;
+    background: rgba(242, 185, 13, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.payment-note i {
+    color: var(--accent-gold);
+    margin-top: 3px;
+}
+
+.success-icon {
+    font-size: 4rem;
+    color: #28a745;
+    margin-bottom: 20px;
+}
+
+.reservation-details {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .tour-viewer-container {
+        height: 400px;
+    }
+}
