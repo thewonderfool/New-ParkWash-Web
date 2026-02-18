@@ -141,3 +141,90 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// Interactive Map Tour Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const mapContainer = document.getElementById('map-container');
+    const photoModal = document.getElementById('photoModal');
+    const photoDisplay = document.getElementById('photo-display');
+    const photoTitle = document.getElementById('photo-title');
+
+    // Sample Data Points (Replace img with actual paths)
+    const tourPoints = [{
+        id: 1,
+        x: 20,
+        y: 40,
+        title: "Entrance Gate",
+        img: "https://via.placeholder.com/800x600?text=Entrance+View"
+    },
+    {
+        id: 2,
+        x: 50,
+        y: 50,
+        title: "Covered Parking",
+        img: "https://via.placeholder.com/800x600?text=Covered+Parking"
+    },
+    {
+        id: 3,
+        x: 75,
+        y: 30,
+        title: "Office",
+        img: "https://via.placeholder.com/800x600?text=Office+Front"
+    },
+    {
+        id: 4,
+        x: 60,
+        y: 80,
+        title: "Shuttle Stop",
+        img: "https://via.placeholder.com/800x600?text=Shuttle+Bus"
+    }
+    ];
+
+    if (mapContainer) {
+        // Initialize Map Pins
+        tourPoints.forEach(point => {
+            const pin = document.createElement('div');
+            pin.className = 'map-pin';
+            pin.style.left = point.x + '%';
+            pin.style.top = point.y + '%';
+            pin.setAttribute('data-title', point.title);
+            pin.innerHTML = '<i class="fa-solid fa-camera"></i>';
+
+            // Click Event
+            pin.addEventListener('click', () => {
+                openPhotoModal(point);
+            });
+
+            mapContainer.appendChild(pin);
+        });
+    }
+
+    // Modal Functions
+    window.openPhotoModal = function (point) {
+        if (!photoModal) return;
+        photoTitle.textContent = point.title;
+        photoDisplay.src = point.img;
+        photoModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.closePhotoModal = function () {
+        if (!photoModal) return;
+        photoModal.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+            photoDisplay.src = ''; // Clear source to prevent flash on next open
+        }, 200);
+    };
+
+    // Close logic already exists in window.onclick for 'bookingModal'
+    // We can extend it or relying on the existing pattern:
+    const originalOnClick = window.onclick;
+    window.onclick = function (event) {
+        if (originalOnClick) originalOnClick(event); // Call existing
+
+        if (event.target == photoModal) {
+            closePhotoModal();
+        }
+    };
+});
