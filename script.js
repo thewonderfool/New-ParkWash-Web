@@ -150,32 +150,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const photoTitle = document.getElementById('photo-title');
 
     // Sample Data Points (Replace img with actual paths)
+    // Updated Data Points for real map layout
     const tourPoints = [{
         id: 1,
-        x: 20,
-        y: 40,
-        title: "Entrance Gate",
+        x: 50,
+        y: 85,
+        title: "Main Entrance",
         img: "https://via.placeholder.com/800x600?text=Entrance+View"
     },
     {
         id: 2,
-        x: 50,
+        x: 30,
         y: 50,
-        title: "Covered Parking",
-        img: "https://via.placeholder.com/800x600?text=Covered+Parking"
+        title: "Secure Parking A",
+        img: "https://via.placeholder.com/800x600?text=Parking+A"
     },
     {
         id: 3,
-        x: 75,
-        y: 30,
-        title: "Office",
-        img: "https://via.placeholder.com/800x600?text=Office+Front"
+        x: 70,
+        y: 50,
+        title: "Secure Parking B",
+        img: "https://via.placeholder.com/800x600?text=Parking+B"
     },
     {
         id: 4,
-        x: 60,
-        y: 80,
-        title: "Shuttle Stop",
+        x: 80,
+        y: 20,
+        title: "Shuttle Pickup",
         img: "https://via.placeholder.com/800x600?text=Shuttle+Bus"
     }
     ];

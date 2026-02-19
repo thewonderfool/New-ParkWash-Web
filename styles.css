@@ -369,20 +369,26 @@ ul {
     left: 0;
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #999;
-    /* Use a real image background when available:
-       background: url('path/to/overhead-map.jpg') no-repeat center/cover;
-    */
+    /* Real Map Background */
+    background: url('images/map-overhead.png') no-repeat center/cover;
     background-color: #ddd;
+
+    /* Interactive States */
+    cursor: grab;
+    transform-origin: center center;
+    transition: transform 0.1s ease-out;
+    /* Smooth zooming */
+    touch-action: none;
+    /* Prevent page scroll on touch */
 }
 
-.map-placeholder-bg p {
-    margin-top: 10px;
-    font-weight: 600;
+.map-container:active {
+    cursor: grabbing;
+}
+
+.map-placeholder-bg p,
+.map-placeholder-bg i {
+    display: none;
 }
 
 /* Map Pins */
