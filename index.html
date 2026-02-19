@@ -294,6 +294,138 @@
 </div>
 
 <script src="script.js"></script>
+<script>
+    // Inline Map Logic to ensure execution and add Pan/Zoom
+    document.addEventListener('DOMContentLoaded', () => {
+        const mapContainer = document.getElementById('map-container');
+        const photoModal = document.getElementById('photoModal');
+        const photoDisplay = document.getElementById('photo-display');
+        const photoTitle = document.getElementById('photo-title');
+
+        // Data Points
+        const tourPoints = [
+            { id: 1, x: 50, y: 85, title: "Main Entrance", img: "https://via.placeholder.com/800x600?text=Entrance+View" },
+            { id: 2, x: 30, y: 50, title: "Secure Parking A", img: "https://via.placeholder.com/800x600?text=Parking+A" },
+            { id: 3, x: 70, y: 50, title: "Secure Parking B", img: "https://via.placeholder.com/800x600?text=Parking+B" },
+            { id: 4, x: 80, y: 20, title: "Shuttle Pickup", img: "https://via.placeholder.com/800x600?text=Shuttle+Bus" }
+        ];
+
+        function renderPins() {
+            // Clear existing matches if any
+            const existingPins = mapContainer.querySelectorAll('.map-pin');
+            existingPins.forEach(p => p.remove());
+
+            tourPoints.forEach(point => {
+                const pin = document.createElement('div');
+                pin.className = 'map-pin';
+                pin.style.left = point.x + '%';
+                pin.style.top = point.y + '%';
+                pin.setAttribute('data-title', point.title);
+                pin.innerHTML = '<i class="fa-solid fa-camera"></i>';
+
+                // Stop propagation so clicking pin doesn't drag map
+                pin.addEventListener('mousedown', (e) => e.stopPropagation());
+                pin.addEventListener('touchstart', (e) => e.stopPropagation());
+
+                pin.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openPhotoModalLocal(point);
+                });
+
+                mapContainer.appendChild(pin);
+            });
+            console.log("Pins rendered:", tourPoints.length);
+        }
+
+        if (mapContainer) {
+            renderPins();
+            initPanZoom(mapContainer);
+        }
+
+        // Local Modal Functions
+        function openPhotoModalLocal(point) {
+            if (!photoModal) return;
+            photoTitle.textContent = point.title;
+            photoDisplay.src = point.img;
+            photoModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Pan/Zoom Logic
+        function initPanZoom(element) {
+            let scale = 1;
+            let panning = false;
+            let pointX = 0;
+            let pointY = 0;
+            let startX = 0;
+            let startY = 0;
+
+            // Transform helper
+            function setTransform() {
+                element.style.transform = `translate(${pointX}px, ${pointY}px) scale(${scale})`;
+            }
+
+            // Mouse Down
+            element.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                startPanning(e.clientX, e.clientY);
+            });
+
+            // Mouse Move
+            document.addEventListener('mousemove', (e) => {
+                if (!panning) return;
+                e.preventDefault();
+                doPan(e.clientX, e.clientY);
+            });
+
+            // Mouse Up
+            document.addEventListener('mouseup', () => {
+                panning = false;
+                element.style.cursor = 'grab';
+            });
+
+            // Wheel Zoom
+            element.parentElement.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                const newScale = Math.min(Math.max(0.5, scale * delta), 4); // Min 0.5x, Max 4x
+                scale = newScale;
+                setTransform();
+            });
+
+            // Touch Support (Basic)
+            element.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    startPanning(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            });
+
+            element.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1 && panning) {
+                    e.preventDefault(); // Prevent scroll
+                    doPan(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            });
+
+            element.addEventListener('touchend', () => {
+                panning = false;
+            });
+
+            function startPanning(x, y) {
+                startX = x - pointX;
+                startY = y - pointY;
+                panning = true;
+                element.style.cursor = 'grabbing';
+            }
+
+            function doPan(x, y) {
+                pointX = x - startX;
+                pointY = y - startY;
+                setTransform();
+            }
+        }
+    });
+</script>
 </body>
 
 </html>
