@@ -16,8 +16,10 @@
     <link rel="stylesheet" href="fonts/galveston.css">
     <link rel="stylesheet" href="styles.css"> <!-- Keep our custom overrides last -->
 
-    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Leaflet CSS (Local) -->
+    <link rel="stylesheet" href="lib/leaflet/leaflet.css">
 </head>
 
 <body>
@@ -47,385 +49,350 @@
         </div>
     </header>
 
-    <!-- ... existing content ... -->
-
-    <!-- Scripts -->
-    <script src="dist/scripts/main.min.1767622294.js"></script>
-    <script src="dist/scripts/Dismissible.8c3f7c34c13765bbedc0.min.js"></script>
-    <script src="dist/scripts/InteractiveMapLite.50caa0482566e95c271e.min.js"></script>
-    <!-- Add other scripts if their functionality is specifically needed, 
-         but main + map is likely sufficient for the visual clone -->
-
-    <script src="script.js"></script>
-</body>
-
-<!-- Hero Section -->
-<section id="home" class="hero">
-    <div class="hero-overlay"></div>
-    <!-- Placeholder for Customer Asset: cruise_ship_flat_design.jpg -->
-    <!-- Logic to switch background if file exists is in CSS class .hero-bg-custom -->
-    <div class="hero-content container">
-        <h1 class="hero-title">Park & Wash <br> <span class="text-gold">Cruise Parking</span></h1>
-        <p class="hero-subtitle">The closest, safest, and most affordable parking for your cruise vacation. Reserve
-            your spot today.</p>
-        <div class="hero-actions">
-            <button class="btn-primary btn-large" onclick="openBookingModal()">Reserve Parking <i
-                    class="fa-solid fa-arrow-right"></i></button>
-            <a href="#services" class="btn-secondary">View Services</a>
-        </div>
-    </div>
-</section>
-
-<!-- Quick Facts -->
-<section class="info-grid container">
-    <div class="info-card">
-        <i class="fa-solid fa-shield-halved icon-gold"></i>
-        <h3>Secure Facility</h3>
-        <p>Secure fenced lot with lighting & cameras.</p>
-    </div>
-    <div class="info-card">
-        <i class="fa-solid fa-tags icon-gold"></i>
-        <h3>Market Pricing</h3>
-        <p>Competitive market pricing — shown during booking.</p>
-    </div>
-    <div class="info-card">
-        <i class="fa-solid fa-clock icon-gold"></i>
-        <h3>Open Daily</h3>
-        <p>Hours vary by cruise schedule.</p>
-    </div>
-</section>
-
-<!-- Interactive Map Tour Section -->
-<section id="map-tour" class="map-section">
-    <div class="container text-center">
-        <h2 class="section-title">Explore the Facility <span class="text-gold">Interactive Map</span></h2>
-        <p class="section-subtitle">Click on the pins to see ground-level photos of our secure parking lot.</p>
-    </div>
-
-    <div class="container map-viewport">
-        <!-- Map Container -->
-        <div class="map-container" id="map-container">
-            <!-- Background Map Image (Placeholder) -->
-            <div class="map-placeholder-bg">
-                <i class="fa-solid fa-map-location-dot fa-3x"></i>
-                <p>Overhead Map Image</p>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <!-- Placeholder for Customer Asset: cruise_ship_flat_design.jpg -->
+        <!-- Logic to switch background if file exists is in CSS class .hero-bg-custom -->
+        <div class="hero-content container">
+            <h1 class="hero-title">Park & Wash <br> <span class="text-gold">Cruise Parking</span></h1>
+            <p class="hero-subtitle">The closest, safest, and most affordable parking for your cruise vacation. Reserve
+                your spot today.</p>
+            <div class="hero-actions">
+                <button class="btn-primary btn-large" onclick="openBookingModal()">Reserve Parking <i
+                        class="fa-solid fa-arrow-right"></i></button>
+                <a href="#services" class="btn-secondary">View Services</a>
             </div>
-            <!-- Pins will be injected here by JS -->
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Photo Modal -->
-<div id="photoModal" class="modal photo-modal">
-    <div class="modal-content photo-modal-content">
-        <span class="close-modal" onclick="closePhotoModal()">&times;</span>
-        <div class="photo-container">
-            <h3 id="photo-title">Location Title</h3>
-            <div class="photo-wrapper">
-                <img id="photo-display" src="" alt="Location View">
+    <!-- Quick Facts -->
+    <section class="info-grid container">
+        <div class="info-card">
+            <i class="fa-solid fa-shield-halved icon-gold"></i>
+            <h3>Secure Facility</h3>
+            <p>Secure fenced lot with lighting & cameras.</p>
+        </div>
+        <div class="info-card">
+            <i class="fa-solid fa-tags icon-gold"></i>
+            <h3>Market Pricing</h3>
+            <p>Competitive market pricing — shown during booking.</p>
+        </div>
+        <div class="info-card">
+            <i class="fa-solid fa-clock icon-gold"></i>
+            <h3>Open Daily</h3>
+            <p>Hours vary by cruise schedule.</p>
+        </div>
+    </section>
+
+    <!-- Interactive Map Tour Section -->
+    <section id="map-tour" class="map-section">
+        <div class="container text-center">
+            <h2 class="section-title">Explore the Facility <span class="text-gold">Interactive Map</span></h2>
+            <p class="section-subtitle">Click on the pins to see ground-level photos of our secure parking lot.</p>
+        </div>
+
+        <div class="container map-viewport">
+            <!-- Map Container -->
+            <div class="map-container" id="map-container">
+                <!-- Background Map Image (Placeholder) -->
+                <div class="map-placeholder-bg">
+                    <i class="fa-solid fa-map-location-dot fa-3x"></i>
+                    <p>Overhead Map Image</p>
+                </div>
+                <!-- Pins will be injected here by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Modal -->
+    <div id="photoModal" class="modal photo-modal">
+        <div class="modal-content photo-modal-content">
+            <span class="close-modal" onclick="closePhotoModal()">&times;</span>
+            <div class="photo-container">
+                <h3 id="photo-title">Location Title</h3>
+                <div class="photo-wrapper">
+                    <button class="nav-btn prev-btn" onclick="changePhoto(-1)">&#10094;</button>
+                    <img id="photo-display" src="" alt="Location View">
+                    <button class="nav-btn next-btn" onclick="changePhoto(1)">&#10095;</button>
+                </div>
+                <div id="photo-counter" class="photo-counter"></div>
             </div>
         </div>
     </div>
-</div>
 
+    <!-- Our Services Section -->
+    <section id="services" class="rates-section bg-light">
+        <div class="container text-center">
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-subtitle">Pricing varies due to the competitive market.<br>Please call for current
+                pricing.
+            </p>
 
+            <div class="rates-grid">
+                <!-- Cruise Parking -->
+                <div class="rate-card popular">
+                    <div class="badge">Most Popular</div>
+                    <i class="fa-solid fa-car fa-3x text-gold" style="margin-bottom: 20px;"></i>
+                    <h4>Cruise Parking</h4>
+                    <p>Secure parking for your vehicle while you enjoy your cruise. Fenced, lighted facility with 24/7
+                        security.</p>
+                    <ul style="text-align: left; margin: 20px 0; font-size: 0.9rem;">
+                        <li><i class="fa-solid fa-check text-gold"></i> Drop‑off near terminal</li>
+                        <li><i class="fa-solid fa-check text-gold"></i> Competitive rates available</li>
+                        <li><i class="fa-solid fa-check text-gold"></i> Digital reservation</li>
+                    </ul>
 
+                    <div class="payment-note"
+                        style="text-align: left; font-size: 0.85rem; background: rgba(10, 25, 47, 0.05);">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <div>
+                            <strong>Drop-off Info:</strong><br> We cannot legally enter port property. We’ll drop you as
+                            close as possible:
+                            <ul style="margin-top: 5px; list-style-type: disc; padding-left: 20px;">
+                                <li>Ships at 25th St & Harborside Dr: about 0.22 miles (less than 5‑minute walk).</li>
+                                <li>Ships opposite New Strand: directly across the street from Park & Wash.</li>
+                            </ul>
+                        </div>
+                    </div>
 
-<!-- Our Services Section -->
-<section id="services" class="rates-section bg-light">
-    <div class="container text-center">
-        <h2 class="section-title">Our Services</h2>
-        <p class="section-subtitle">Pricing varies due to the competitive market.<br>Please call for current pricing.
-        </p>
+                    <button class="btn-primary btn-block" onclick="openBookingModal()">Book Parking</button>
+                </div>
 
-        <div class="rates-grid">
-            <!-- Cruise Parking -->
-            <div class="rate-card popular">
-                <div class="badge">Most Popular</div>
-                <i class="fa-solid fa-car fa-3x text-gold" style="margin-bottom: 20px;"></i>
-                <h4>Cruise Parking</h4>
-                <p>Secure parking for your vehicle while you enjoy your cruise. Fenced, lighted facility with 24/7
-                    security.</p>
-                <ul style="text-align: left; margin: 20px 0; font-size: 0.9rem;">
-                    <li><i class="fa-solid fa-check text-gold"></i> Drop‑off near terminal</li>
-                    <li><i class="fa-solid fa-check text-gold"></i> Competitive rates available</li>
-                    <li><i class="fa-solid fa-check text-gold"></i> Digital reservation</li>
+                <!-- Car Detailing -->
+                <div class="rate-card">
+                    <i class="fa-solid fa-spray-can-sparkles fa-3x text-gold" style="margin-bottom: 20px;"></i>
+                    <h4>Car Detailing</h4>
+                    <p>Full-service wash and detailing while you cruise. Choose Regular, Deluxe, or VIP options during
+                        booking.</p>
+                    <ul style="text-align: left; margin: 20px 0;">
+                        <li><i class="fa-solid fa-check text-gold"></i> Exterior wash & dry</li>
+                        <li><i class="fa-solid fa-check text-gold"></i> Interior vacuum & windows</li>
+                        <li><i class="fa-solid fa-check text-gold"></i> Premium wax (VIP)</li>
+                    </ul>
+                    <button class="btn-outline btn-block" onclick="openBookingModal()">Add to Booking</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <div class="logo">
+                    <i class="fa-solid fa-anchor text-gold"></i>
+                    <h3>Port of Galveston</h3>
+                </div>
+                <p>Providing safe and secure parking for cruise passengers for over 20 years.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+
+                    <li><a href="#directions">Directions</a></li>
                 </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li><i class="fa-solid fa-phone"></i> (409) 765-9321</li>
+                    <li><i class="fa-solid fa-envelope"></i> parking@portofgalveston.com</li>
+                    <li><i class="fa-solid fa-location-dot"></i> 123 Rosenberg Ave, Galveston, TX</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2024 Port of Galveston Parking. All Rights Reserved.</p>
+        </div>
+    </footer>
 
-                <div class="payment-note"
-                    style="text-align: left; font-size: 0.85rem; background: rgba(10, 25, 47, 0.05);">
-                    <i class="fa-solid fa-circle-info"></i>
-                    <div>
-                        <strong>Drop-off Info:</strong><br> We cannot legally enter port property. We’ll drop you as
-                        close as possible:
-                        <ul style="margin-top: 5px; list-style-type: disc; padding-left: 20px;">
-                            <li>Ships at 25th St & Harborside Dr: about 0.22 miles (less than 5‑minute walk).</li>
-                            <li>Ships opposite New Strand: directly across the street from Park & Wash.</li>
-                        </ul>
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeBookingModal()">&times;</span>
+            <div class="modal-header">
+                <h2>Reserve Your Spot</h2>
+                <p>Secure your parking in minutes.</p>
+            </div>
+            <form id="bookingForm" onsubmit="handleReservation(event)">
+                <div class="form-group">
+                    <label for="cruise-ship">Select Your Cruise Ship</label>
+                    <select id="cruise-ship" required>
+                        <option value="" disabled selected>Select Ship</option>
+                        <option value="carnival-breeze">Carnival Breeze</option>
+                        <option value="carnival-dream">Carnival Dream</option>
+                        <option value="royal-allure">Royal Caribbean Allure</option>
+                        <option value="disney-magic">Disney Magic</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="arrival-date">Arrival Date</label>
+                        <input type="date" id="arrival-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="departure-date">Departure Date</label>
+                        <input type="date" id="departure-date" required>
                     </div>
                 </div>
-
-                <button class="btn-primary btn-block" onclick="openBookingModal()">Book Parking</button>
-            </div>
-
-            <!-- Car Detailing -->
-            <div class="rate-card">
-                <i class="fa-solid fa-spray-can-sparkles fa-3x text-gold" style="margin-bottom: 20px;"></i>
-                <h4>Car Detailing</h4>
-                <p>Full-service wash and detailing while you cruise. Choose Regular, Deluxe, or VIP options during
-                    booking.</p>
-                <ul style="text-align: left; margin: 20px 0;">
-                    <li><i class="fa-solid fa-check text-gold"></i> Exterior wash & dry</li>
-                    <li><i class="fa-solid fa-check text-gold"></i> Interior vacuum & windows</li>
-                    <li><i class="fa-solid fa-check text-gold"></i> Premium wax (VIP)</li>
-                </ul>
-                <button class="btn-outline btn-block" onclick="openBookingModal()">Add to Booking</button>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Footer -->
-<footer id="contact" class="footer">
-    <div class="container footer-content">
-        <div class="footer-col">
-            <div class="logo">
-                <i class="fa-solid fa-anchor text-gold"></i>
-                <h3>Port of Galveston</h3>
-            </div>
-            <p>Providing safe and secure parking for cruise passengers for over 20 years.</p>
-        </div>
-        <div class="footer-col">
-            <h4>Quick Links</h4>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-
-                <li><a href="#directions">Directions</a></li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h4>Contact Us</h4>
-            <ul>
-                <li><i class="fa-solid fa-phone"></i> (409) 765-9321</li>
-                <li><i class="fa-solid fa-envelope"></i> parking@portofgalveston.com</li>
-                <li><i class="fa-solid fa-location-dot"></i> 123 Rosenberg Ave, Galveston, TX</li>
-            </ul>
-        </div>
-    </div>
-    <div class="footer-bottom text-center">
-        <p>&copy; 2024 Port of Galveston Parking. All Rights Reserved.</p>
-    </div>
-</footer>
-
-<!-- Booking Modal -->
-<div id="bookingModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeBookingModal()">&times;</span>
-        <div class="modal-header">
-            <h2>Reserve Your Spot</h2>
-            <p>Secure your parking in minutes.</p>
-        </div>
-        <form id="bookingForm" onsubmit="handleReservation(event)">
-            <div class="form-group">
-                <label for="cruise-ship">Select Your Cruise Ship</label>
-                <select id="cruise-ship" required>
-                    <option value="" disabled selected>Select Ship</option>
-                    <option value="carnival-breeze">Carnival Breeze</option>
-                    <option value="carnival-dream">Carnival Dream</option>
-                    <option value="royal-allure">Royal Caribbean Allure</option>
-                    <option value="disney-magic">Disney Magic</option>
-                </select>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="arrival-date">Arrival Date</label>
-                    <input type="date" id="arrival-date" required>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vehicle-make">Vehicle Make</label>
+                        <input type="text" id="vehicle-make" placeholder="e.g. Ford" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicle-model">Model</label>
+                        <input type="text" id="vehicle-model" placeholder="e.g. Explorer" required>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="departure-date">Departure Date</label>
-                    <input type="date" id="departure-date" required>
+                    <label for="license-plate">License Plate</label>
+                    <input type="text" id="license-plate" placeholder="TX-1234" required>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="vehicle-make">Vehicle Make</label>
-                    <input type="text" id="vehicle-make" placeholder="e.g. Ford" required>
+
+                <div class="price-estimate">
+                    <span>Estimated Total:</span>
+                    <span id="total-price" class="price-value">$0.00</span>
                 </div>
-                <div class="form-group">
-                    <label for="vehicle-model">Model</label>
-                    <input type="text" id="vehicle-model" placeholder="e.g. Explorer" required>
+
+                <div class="payment-note">
+                    <i class="fa-solid fa-circle-info"></i> No payment required today. Payment will be collected upon
+                    arrival at the parking lot.
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="license-plate">License Plate</label>
-                <input type="text" id="license-plate" placeholder="TX-1234" required>
-            </div>
 
-            <div class="price-estimate">
-                <span>Estimated Total:</span>
-                <span id="total-price" class="price-value">$0.00</span>
-            </div>
-
-            <div class="payment-note">
-                <i class="fa-solid fa-circle-info"></i> No payment required today. Payment will be collected upon
-                arrival at the parking lot.
-            </div>
-
-            <button type="submit" class="btn-primary btn-block">Confirm Reservation</button>
-        </form>
-    </div>
-</div>
-
-<!-- Success Modal -->
-<div id="successModal" class="modal">
-    <div class="modal-content text-center">
-        <div class="success-icon">
-            <i class="fa-solid fa-check-circle"></i>
+                <button type="submit" class="btn-primary btn-block">Confirm Reservation</button>
+            </form>
         </div>
-        <h2>Reservation Confirmed!</h2>
-        <p>Your parking spot has been reserved.</p>
-        <div class="reservation-details">
-            <p><strong>Confirmation #:</strong> <span id="conf-number">8X29B1</span></p>
-            <p>Please present this confirmation to the attendant upon arrival.</p>
-        </div>
-        <button class="btn-primary" onclick="closeSuccessModal()">Close</button>
     </div>
-</div>
 
-<script src="script.js"></script>
-<script>
-    // Inline Map Logic to ensure execution and add Pan/Zoom
-    document.addEventListener('DOMContentLoaded', () => {
-        const mapContainer = document.getElementById('map-container');
-        const photoModal = document.getElementById('photoModal');
-        const photoDisplay = document.getElementById('photo-display');
-        const photoTitle = document.getElementById('photo-title');
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content text-center">
+            <div class="success-icon">
+                <i class="fa-solid fa-check-circle"></i>
+            </div>
+            <h2>Reservation Confirmed!</h2>
+            <p>Your parking spot has been reserved.</p>
+            <div class="reservation-details">
+                <p><strong>Confirmation #:</strong> <span id="conf-number">8X29B1</span></p>
+                <p>Please present this confirmation to the attendant upon arrival.</p>
+            </div>
+            <button class="btn-primary" onclick="closeSuccessModal()">Close</button>
+        </div>
+    </div>
 
-        // Data Points
-        const tourPoints = [
-            { id: 1, x: 50, y: 85, title: "Main Entrance", img: "https://via.placeholder.com/800x600?text=Entrance+View" },
-            { id: 2, x: 30, y: 50, title: "Secure Parking A", img: "https://via.placeholder.com/800x600?text=Parking+A" },
-            { id: 3, x: 70, y: 50, title: "Secure Parking B", img: "https://via.placeholder.com/800x600?text=Parking+B" },
-            { id: 4, x: 80, y: 20, title: "Shuttle Pickup", img: "https://via.placeholder.com/800x600?text=Shuttle+Bus" }
-        ];
+    <script src="script.js"></script>
+    <!-- Leaflet JS (Local) -->
+    <script src="lib/leaflet/leaflet.js"></script>
 
-        function renderPins() {
-            // Clear existing matches if any
-            const existingPins = mapContainer.querySelectorAll('.map-pin');
-            existingPins.forEach(p => p.remove());
+    <!-- Map Data -->
+    <script src="js/map-data.js"></script>
 
-            tourPoints.forEach(point => {
-                const pin = document.createElement('div');
-                pin.className = 'map-pin';
-                pin.style.left = point.x + '%';
-                pin.style.top = point.y + '%';
-                pin.setAttribute('data-title', point.title);
-                pin.innerHTML = '<i class="fa-solid fa-camera"></i>';
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mapContainer = document.getElementById('map-container');
+            const photoModal = document.getElementById('photoModal');
+            const photoDisplay = document.getElementById('photo-display');
+            const photoTitle = document.getElementById('photo-title');
 
-                // Stop propagation so clicking pin doesn't drag map
-                pin.addEventListener('mousedown', (e) => e.stopPropagation());
-                pin.addEventListener('touchstart', (e) => e.stopPropagation());
+            if (!mapContainer) return;
 
-                pin.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    openPhotoModalLocal(point);
+            // Initialize Leaflet Map
+            // CRS.Simple is for non-geographic maps (like images)
+            const map = L.map('map-container', {
+                crs: L.CRS.Simple,
+                minZoom: -1,
+                maxZoom: 2,
+                zoomControl: true,
+                attributionControl: false
+            });
+
+            // Define Map Dimensions based on image aspect ratio?
+            // Since we don't know exact pixels, we define a coordinate system.
+            // Let's say image is 1000x1000 units for simplicity.
+            const bounds = [[0, 0], [1000, 1600]]; // Height, Width (Landscape)
+
+            // Load Image Overlay using your real map image
+            const image = L.imageOverlay('images/map-overhead.png', bounds).addTo(map);
+
+            // Fit map to bounds initially
+            map.fitBounds(bounds);
+
+            // Data Points (Now using Leaflet coordinates [y, x])
+            // Converted approx % to units: x% * 1600, y% * 1000 (inverted Y usually in Leaflet? No, [Lat, Lng] = [Y, X])
+            // Top-Left is [1000, 0], Bottom-Left is [0, 0] in standard cartesian?
+            // Leaflet Simple CRS: [0,0] is usually top-left if we map it that way, but standard image overlay:
+            // [0,0] is bottom-left. Let's assume [0,0] bottom-left.
+            // 
+            // Original: x=50% (800 units), y=85% (from top? CSS top is from top). 
+            // So if Y=0 is bottom, then 85% from top is 15% from bottom = 150 units Y.
+
+            // Data Points (Calibrated from real map image)
+            // tourPoints is defined in js/map-data.js
+
+            // Custom Icon
+            const pinIcon = L.divIcon({
+                className: 'custom-map-pin',
+                html: '<div class="pin-inner"><i class="fa-solid fa-camera"></i></div>',
+                iconSize: [32, 32],
+                iconAnchor: [16, 16]
+            });
+
+            // Add Markers
+            if (typeof tourPoints !== 'undefined') {
+                tourPoints.forEach(point => {
+                    L.marker([point.lat, point.lng], { icon: pinIcon })
+                        .addTo(map)
+                        .on('click', () => openPhotoModalLocal(point));
                 });
-
-                mapContainer.appendChild(pin);
-            });
-            console.log("Pins rendered:", tourPoints.length);
-        }
-
-        if (mapContainer) {
-            renderPins();
-            initPanZoom(mapContainer);
-        }
-
-        // Local Modal Functions
-        function openPhotoModalLocal(point) {
-            if (!photoModal) return;
-            photoTitle.textContent = point.title;
-            photoDisplay.src = point.img;
-            photoModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Pan/Zoom Logic
-        function initPanZoom(element) {
-            let scale = 1;
-            let panning = false;
-            let pointX = 0;
-            let pointY = 0;
-            let startX = 0;
-            let startY = 0;
-
-            // Transform helper
-            function setTransform() {
-                element.style.transform = `translate(${pointX}px, ${pointY}px) scale(${scale})`;
             }
 
-            // Mouse Down
-            element.addEventListener('mousedown', (e) => {
-                e.preventDefault();
-                startPanning(e.clientX, e.clientY);
-            });
+            // Gallery State
+            let currentPhotos = [];
+            let currentPhotoIndex = 0;
 
-            // Mouse Move
-            document.addEventListener('mousemove', (e) => {
-                if (!panning) return;
-                e.preventDefault();
-                doPan(e.clientX, e.clientY);
-            });
+            // Local Modal Functions
+            window.openPhotoModalLocal = function (point) {
+                if (!photoModal) return;
 
-            // Mouse Up
-            document.addEventListener('mouseup', () => {
-                panning = false;
-                element.style.cursor = 'grab';
-            });
+                photoTitle.textContent = point.title;
+                currentPhotos = point.images || [point.img]; // Fallback if single img
+                currentPhotoIndex = 0;
 
-            // Wheel Zoom
-            element.parentElement.addEventListener('wheel', (e) => {
-                e.preventDefault();
-                const delta = e.deltaY > 0 ? 0.9 : 1.1;
-                const newScale = Math.min(Math.max(0.5, scale * delta), 4); // Min 0.5x, Max 4x
-                scale = newScale;
-                setTransform();
-            });
+                updatePhotoDisplay();
 
-            // Touch Support (Basic)
-            element.addEventListener('touchstart', (e) => {
-                if (e.touches.length === 1) {
-                    startPanning(e.touches[0].clientX, e.touches[0].clientY);
+                photoModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            };
+
+            window.changePhoto = function (direction) {
+                currentPhotoIndex += direction;
+                // Loop functionality
+                if (currentPhotoIndex >= currentPhotos.length) currentPhotoIndex = 0;
+                if (currentPhotoIndex < 0) currentPhotoIndex = currentPhotos.length - 1;
+
+                updatePhotoDisplay();
+            };
+
+            function updatePhotoDisplay() {
+                if (currentPhotos.length === 0) return;
+
+                const photoDisplay = document.getElementById('photo-display');
+                const photoCounter = document.getElementById('photo-counter');
+
+                photoDisplay.src = currentPhotos[currentPhotoIndex];
+
+                if (currentPhotos.length > 1) {
+                    photoCounter.textContent = `${currentPhotoIndex + 1} / ${currentPhotos.length}`;
+                } else {
+                    photoCounter.textContent = "";
                 }
-            });
-
-            element.addEventListener('touchmove', (e) => {
-                if (e.touches.length === 1 && panning) {
-                    e.preventDefault(); // Prevent scroll
-                    doPan(e.touches[0].clientX, e.touches[0].clientY);
-                }
-            });
-
-            element.addEventListener('touchend', () => {
-                panning = false;
-            });
-
-            function startPanning(x, y) {
-                startX = x - pointX;
-                startY = y - pointY;
-                panning = true;
-                element.style.cursor = 'grabbing';
             }
-
-            function doPan(x, y) {
-                pointX = x - startX;
-                pointY = y - startY;
-                setTransform();
-            }
-        }
-    });
-</script>
+        });
+    </script>
 </body>
 
 </html>
